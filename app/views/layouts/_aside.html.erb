@@ -1,0 +1,62 @@
+<div id="mySidenav" class="sidenav main-sidebar">
+  <a href="<%= root_path %>" class="brand-link" >
+    <img src="<%= image_path('CPU.png')%>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+    <span class="brand-text font-weight-light d-none">Administrator</span>
+  </a>
+
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column">
+          <li class="nav-item ml-2">
+            <a href="<%= dashboard_path %>" class="nav-link">
+              <i class="nav-icon fa fa-tachometer"></i>
+              <p class="d-none"> Dashboard </p>
+            </a>
+            <ul class="nav nav-treeview">
+            </ul>
+          </li>
+
+          <li class="nav-item ml-2">
+            <a href="<%= election_path %>" class="nav-link">
+              <i class="nav-icon fa fa-dropbox"></i>
+              <p class="d-none"> Election </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ml-2">
+                <a href="<%= election_candidates_path %>" class="nav-link">
+                  <i class="nav-icon fa fa-calendar-check-o"></i>
+                  <p class="d-none"> Candidates </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item ml-2">
+            <a href="<%= directory_path %>" class="nav-link">
+              <i class="nav-icon fa fa-bookmark"></i>
+              <p class="d-none"> Directory </p>
+            </a>
+            <ul class="nav nav-treeview">
+            </ul>
+          </li>
+
+          <li class="nav-item ml-2">
+            <a href="<%= events_path %>" class="nav-link">
+              <i class="nav-icon fa fa-calendar"></i>
+              <p class="d-none"> Events </p>
+            </a>
+            <ul class="nav nav-treeview">
+            </ul>
+          </li>
+
+          <li class="nav-item ml-2">
+            <a href="<%= news_path %>" class="nav-link">
+              <i class="nav-icon fa fa-edit"></i>
+              <p class="d-none"> News </p>
+            </a>
+            <ul class="nav nav-treeview">
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+</div>
