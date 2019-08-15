@@ -8,32 +8,32 @@
 #
 #
 
-ActiveRecord::Base.connection.execute("TRUNCATE social_media_types")
+#ActiveRecord::Base.connection.execute("TRUNCATE social_media_types")
 social_media_types = ['facebook', 'instagram', 'twitter', 'linkedin',
                       'pinterest', 'tumblr', 'snapchat'].collect do |s|
   SocialMediaType.create name: s
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE event_types")
+#ActiveRecord::Base.connection.execute("TRUNCATE event_types")
 event_types = ['Batch Reunion', 'College Reunion', 'Alumni Homecoming'].collect do |e|
   EventType.create name: e 
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE campuses")
+#ActiveRecord::Base.connection.execute("TRUNCATE campuses")
 
 campuses = ['Diliman', 'Cebu', 'Los Banos', 'Miag-ao', 'Manila'].collect do |e|
   Campus.create name: e
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE colleges")
+#ActiveRecord::Base.connection.execute("TRUNCATE colleges")
 ['IT', 'Law', 'Medicine', 'Engineering', 'Social Sciences', 'Arts'].each do |c|
   campuses.each do |campus|
     College.create(campus: campus, name: c)
   end
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE courses")
-ActiveRecord::Base.connection.execute("TRUNCATE batches")
+#ActiveRecord::Base.connection.execute("TRUNCATE courses")
+#ActiveRecord::Base.connection.execute("TRUNCATE batches")
 { 'IT': ['BSIT','BSCS','BSCE'],
   'Law': ['LLB', 'JDL'],
   'Medicine': ['BSN', 'DPT', 'DMD'],
@@ -52,7 +52,7 @@ ActiveRecord::Base.connection.execute("TRUNCATE batches")
 
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE people")
+#ActiveRecord::Base.connection.execute("TRUNCATE people")
 [
   ['Lloyd', 'Sanchez', 'V', '1985-01-20', '342-H Tres de Abril St. Cebu City', 'lloydvsanchez@gmail.com'],
   ['Jose', 'Rizal', 'P', '1990-01-01', '123 Calamba Laguna', 'joseprizal@gmail.com'],
@@ -68,8 +68,8 @@ ActiveRecord::Base.connection.execute("TRUNCATE people")
 end
 
 
-ActiveRecord::Base.connection.execute("TRUNCATE students")
-ActiveRecord::Base.connection.execute("TRUNCATE social_media")
+#ActiveRecord::Base.connection.execute("TRUNCATE students")
+#ActiveRecord::Base.connection.execute("TRUNCATE social_media")
 (0..3).each do |i|
   batch = Batch.offset(rand(Batch.count)).first
   Person.all.each do |p|
@@ -79,15 +79,16 @@ ActiveRecord::Base.connection.execute("TRUNCATE social_media")
   end
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE news")
+#ActiveRecord::Base.connection.execute("TRUNCATE news")
 (0..10).each do |i|
   type = [Campus, College, Course, Batch].sample
   subscriber = type.offset(rand(type.count)).first
   News.create(title: "News #{i}", article: "Dummy article #{i}", subscriber: subscriber)
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE events")
+#ActiveRecord::Base.connection.execute("TRUNCATE events")
 (0..10).each do |i|
+  type = [Campus, College, Course, Batch].sample
   participant = type.offset(rand(type.count)).first
   Event.create(name: "Event #{i}", venue: "Venue #{i}",
                event_type: event_types.sample,
@@ -95,14 +96,14 @@ ActiveRecord::Base.connection.execute("TRUNCATE events")
                participants: participant)
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE elections")
+#ActiveRecord::Base.connection.execute("TRUNCATE elections")
 (0..10).each do |i|
   type = [Campus, College, Course, Batch].sample
   participant = type.offset(rand(type.count)).first
   Election.create(name: "Election #{i}", date: (DateTime.now + rand(365).days), participants: participant)
 end
 
-ActiveRecord::Base.connection.execute("TRUNCATE positions")
+#ActiveRecord::Base.connection.execute("TRUNCATE positions")
 positions = ['President', 'Secretary', 'Treasurer', 'Muse', 'Packmule', 'Decor'].collect do |p|
   Position.create(name: p)
 end

@@ -12,20 +12,20 @@
 
 ActiveRecord::Schema.define(version: 2019_08_07_055433) do
 
-  create_table "batches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "batches", force: :cascade do |t|
     t.integer "course_id"
     t.string "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "campuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "campuses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "candidates", force: :cascade do |t|
     t.integer "position_id"
     t.integer "student_id"
     t.integer "election_id"
@@ -34,21 +34,21 @@ ActiveRecord::Schema.define(version: 2019_08_07_055433) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "colleges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "colleges", force: :cascade do |t|
     t.integer "campus_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
     t.integer "college_id"
     t.string "course"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "elections", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "elections", force: :cascade do |t|
     t.string "name"
     t.datetime "date"
     t.string "participants_type"
@@ -57,25 +57,25 @@ ActiveRecord::Schema.define(version: 2019_08_07_055433) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "event_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "event_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.integer "event_type_id"
     t.string "name"
     t.string "venue"
     t.datetime "date"
     t.string "participants_type"
     t.integer "participants_id"
+    t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "approved", default: false
   end
 
-  create_table "news", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "news", force: :cascade do |t|
     t.string "title"
     t.text "article"
     t.integer "subscriber_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_055433) do
     t.datetime "image_updated_at"
   end
 
-  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "middlename"
@@ -99,13 +99,13 @@ ActiveRecord::Schema.define(version: 2019_08_07_055433) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "positions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "social_media", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "social_media", force: :cascade do |t|
     t.string "locator"
     t.integer "social_media_type_id"
     t.integer "student_id"
@@ -113,13 +113,13 @@ ActiveRecord::Schema.define(version: 2019_08_07_055433) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "social_media_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "social_media_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "students", force: :cascade do |t|
     t.integer "batch_id"
     t.integer "person_id"
     t.boolean "alumni"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_055433) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
