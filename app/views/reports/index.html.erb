@@ -1,0 +1,116 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th class='tbl-head' colspan=4>Report</th>
+        </tr>
+        <tr>
+          <th colspan=4>
+            <%= form_tag(reports_search_path, method: :post, id: 'reports_form') do %>
+              <select id="campus" name="campus" onchange="getColleges(this)">
+                <% @campus.each do |c| %>
+                  <option value='<%= c.id %>'><%= c.name.capitalize %></option>
+                <% end %>
+              </select>
+              <select id="colleges" name="colleges" onchange="getCourses(this)">
+              </select>
+              <select id="courses" name="courses" onchange="getBatches(this)">
+              </select>
+              <select id="batches" name="batches">
+              </select>
+              <input type="text" id="search" name="search">
+              <button class="btn btn-primary" type="submit">Search</button>
+            <% end %>
+          </th>
+        </tr>
+        <tr>
+          <th>ID</th>
+          <th>TYPE</th>
+          <th>TITLE</th>
+          <th>DATE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% { event: @events, election: @elections}.each do |e_key, e_type| %>
+          <% next unless e_type
+            e_type.each do |e| %>
+            <tr>
+              <th><%= e.id %></th>
+              <th><%= e_key.upcase %></th>
+              <th><%= e.name.capitalize %></th>
+              <th><%= e.date.strftime('%F') %></th>
+            </tr>
+          <% end %>
+        <% end %>
+        <tr>
+          <th colspan=4>
+            <button class="btn btn-primary" id="export" onclick="exportCSV()">Export CSV</button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  function exportCSV() {
+    window.location.href = "/reports/export" + window.location.search;
+  }
+
+  function getColleges(elem) {
+    $.ajax({
+      url: '/election_participants/campus/' + elem.value,
+      success: function(data, textStatus, jqXHR) {
+        console.log(data);
+        var colleges = $('#colleges');
+        colleges.empty();
+        colleges.append($('<option>'));
+        data.forEach(function(item, index) {
+          colleges.append($('<option>', { value: item.id, text: item.name}))
+        });
+      },
+      error: function(jqXHR, textStatus, error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getCourses(elem) {
+    $.ajax({
+      url: '/election_participants/college/' + elem.value,
+      success: function(data, textStatus, jqXHR) {
+        console.log(data);
+        var colleges = $('#courses');
+        colleges.empty();
+        colleges.append($('<option>'));
+        data.forEach(function(item, index) {
+          colleges.append($('<option>', { value: item.id, text: item.course}))
+        });
+      },
+      error: function(jqXHR, textStatus, error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getBatches(elem) {
+    $.ajax({
+      url: '/election_participants/course/' + elem.value,
+      success: function(data, textStatus, jqXHR) {
+        console.log(data);
+        var colleges = $('#batches');
+        colleges.empty();
+        colleges.append($('<option>'));
+        data.forEach(function(item, index) {
+          colleges.append($('<option>', { value: item.id, text: item.year}))
+        });
+      },
+      error: function(jqXHR, textStatus, error) {
+        console.log(error);
+      }
+    });
+  }
+</script>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'home#index'
+  root 'home#dashboard'
 
   get 'home/dashboard', to: 'home#dashboard', as: 'dashboard'
   get 'home', to: 'home#index', as: 'home'
@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   get 'news', to: 'news#show', as: 'news'
   post 'news/create', to: 'news#create', as: 'news_create'
   get 'news/delete/:id', to: 'news#delete', as: 'news_delete'
+
+  get 'reports', to: 'reports#index', as: 'reports'
+  post 'reports/search', to: 'reports#search', as: 'reports_search'
+  get 'reports/export', to: 'reports#export', as: 'reports_export'
 end

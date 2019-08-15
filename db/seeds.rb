@@ -75,7 +75,7 @@ end
   Person.all.each do |p|
     student = Student.create(batch: batch, person: p, alumni: 1, voter: 1)
     smt = social_media_types.sample
-    SocialMedium.create(social_media_type_id: smt.id, student: student, locator: "#{smt}: #{p.fullname}")
+    SocialMedium.create(social_media_type_id: smt.id, student: student, locator: "#{smt.name}: #{p.fullname}")
   end
 end
 
