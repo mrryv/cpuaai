@@ -8,7 +8,7 @@
         <th>ID</th>
         <th>NAME</th>
         <th>DATE</th>
-        <th>PARTICIPANTS</th>
+        
         <th colspan=2></th>
       </tr>
     </thead>
@@ -18,7 +18,7 @@
           <td><%= e.id %></td>
           <td><%= e.name.capitalize %></td>
           <td><%= e.date.strftime('%F') %></td>
-          <td><%= format_participants(e.participants)%></td>
+         
           <!--td><button>Edit</button></td-->
           <td><a class="btn btn-danger" href="<%= election_delete_path(e.id) %>">Delete</a></td>
         </tr>
@@ -33,11 +33,7 @@
           <input type="text" id="datepicker" name="datepicker" placeholder="<%= DateTime.now.strftime('%F') %>">
         </td>
         <td>
-          <select id="campus" name="campus" onchange="getColleges(this)">
-            <% @campus.each do |c| %>
-              <option value='<%= c.id %>'><%= c.name.capitalize %></option>
-            <% end %>
-          </select>
+  
           <select id="colleges" name="colleges" onchange="getCourses(this)">
           </select>
           <select id="courses" name="courses" onchange="getBatches(this)">
