@@ -20,7 +20,7 @@
             <%= e.article %><br>
             <img src="<%= e.image.url %>" alt="no-image" width="300"/>
           </td>
-          <td><%= format_participants(e.subscriber) %></td>
+         
           <td><a class="btn btn-danger" href="<%= news_delete_path(e.id) %>">Delete</a></td>
         </tr>
       <% end %>
@@ -34,74 +34,10 @@
           <textarea id="article" name="article" placeholder="Article Contents"></textarea>
           <%= file_field_tag 'image', accept: 'image/*' %>
         </td>
-        <td colspan=2>
-          <select id="campus" name="campus" onchange="getColleges(this)">
-            <% @campus.each do |c| %>
-              <option value='<%= c.id %>'><%= c.name.capitalize %></option>
-            <% end %>
-          </select>
-          <select id="colleges" name="colleges" onchange="getCourses(this)">
-          </select>
-          <select id="courses" name="courses" onchange="getBatches(this)">
-          </select>
-          <select id="batches" name="batches">
-          </select>
-        </td>
+        
         <% end %>
       </tr>
     </tbody>
   </table>
 </div>
 
-<script>
-  function getColleges(elem) {
-    $.ajax({
-      url: '/election_participants/campus/' + elem.value,
-      success: function(data, textStatus, jqXHR) {
-        console.log(data);
-        var colleges = $('#colleges');
-        colleges.empty();
-        data.forEach(function(item, index) {
-          colleges.append($('<option>', { value: item.id, text: item.name}))
-        });
-      },
-      error: function(jqXHR, textStatus, error) {
-        console.log(error);
-      }
-    });
-  }
-
-  function getCourses(elem) {
-    $.ajax({
-      url: '/election_participants/college/' + elem.value,
-      success: function(data, textStatus, jqXHR) {
-        console.log(data);
-        var colleges = $('#courses');
-        colleges.empty();
-        data.forEach(function(item, index) {
-          colleges.append($('<option>', { value: item.id, text: item.course}))
-        });
-      },
-      error: function(jqXHR, textStatus, error) {
-        console.log(error);
-      }
-    });
-  }
-
-  function getBatches(elem) {
-    $.ajax({
-      url: '/election_participants/course/' + elem.value,
-      success: function(data, textStatus, jqXHR) {
-        console.log(data);
-        var colleges = $('#batches');
-        colleges.empty();
-        data.forEach(function(item, index) {
-          colleges.append($('<option>', { value: item.id, text: item.year}))
-        });
-      },
-      error: function(jqXHR, textStatus, error) {
-        console.log(error);
-      }
-    });
-  }
-</script>
