@@ -9,7 +9,7 @@
         <th>FIRSTNAME</th>
         <th>LASTNAME</th>
         <th>MIDDLENAME</th>
-        <th>BIRTHDAY</th>
+       
         <th>ADDRESS</th>
         <th>EMAIL</th>
         <th>ALUMNI</th>
@@ -26,7 +26,7 @@
           <td><%= s.person.firstname.capitalize %></td>
           <td><%= s.person.lastname.capitalize %></td>
           <td><%= s.person.middlename.capitalize %></td>
-          <td><%= s.person.birthdate.strftime('%F') %></td>
+         
           <td><%= s.person.address %></td>
           <td><%= s.person.email %></td>
           <td><%= s.alumni ? 'Yes' : 'No' %></td>
@@ -47,7 +47,7 @@
           <input type="text" name="firstname" id="firstname" placeholder="Firstname"><br/>
           <input type="text" name="lastname" id="lastname" placeholder="Lastname"><br/>
           <input type="text" name="middlename" id="middlename" placeholder="Middlename"><br/>
-          <input type="text" id="birthday" name="birthday" placeholder="<%= DateTime.now.strftime('%F') %>"><br/>
+         
           <textarea id="address" name="address" placeholder="Address"></textarea><br/>
           <input type="text" name="email" id="email" placeholder="Email"><br/>
           <div><%= check_box("approved", "alumni", {checked: true}) %>Alumni</div><br/>
@@ -72,8 +72,4 @@
   </table>
 </div>
 
-<script>
-  $(function() {
-    $("#birthday").datepicker({ dateFormat: 'yy-mm-dd' });
-  });
-</script>
+
